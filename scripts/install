@@ -169,12 +169,14 @@ pushd $final_path
 	if grep "python3" $final_path/$appname/$FORKNAME-bin ; then
 		python3 -m venv venv
 		venv/bin/pip3 install --upgrade pip
-		venv/bin/pip3 install wheel  Cython==3.0.0a10
+		venv/bin/pip3 install wheel
+                venv/bin/pip3 install gevent==20.9.0 --no-build-isolation
 		venv/bin/pip3 install -r $appname/requirements.txt
 	else
 		virtualenv venv
 		venv/bin/pip3 install --upgrade pip
-		venv/bin/pip install wheel  Cython==3.0.0a10
+		venv/bin/pip install wheel
+                venv/bin/pip install gevent==20.9.0 --no-build-isolation
 		venv/bin/pip install -r $appname/requirements.txt
 	fi
 	ynh_secure_remove --file="$final_path/.cargo"
